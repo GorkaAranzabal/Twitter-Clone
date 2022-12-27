@@ -24,7 +24,7 @@ def homepage():
     #Print them to console
     # for tweet in Tweet.query.all():
     #     print(tweet.content)
-    # print(tweets)
+    print(tweets)
     user = Tweet.query.all()
     return render_template('homepage.html', tweets=tweets, user=user)
 
