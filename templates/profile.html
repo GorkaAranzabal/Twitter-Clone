@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+  </head>
+  <body>
+    <div class="profile-header">
+      <!--<img src="{{ uprofile }}" alt="Profile picture">-->
+      <h1>{{ user.name }}</h1>
+      <p>@{{ user.username }}</p>
+    </div>
+    <div class="profile-bio">
+      <p>{{ user.bio }}</p>
+    </div>
+    <div class="profile-stats">
+      <p>Tweets: {{ user.tweet_count }}</p>
+      <p>Followers: {{ user.follower_count }}</p>
+      <p>Following: {{ user.following_count }}</p>
+    </div>
+    <div class="profile-tweets">
+      {% for tweet in user.tweets %}
+        <div class="tweet">
+          <p>{{ tweet.content }}</p>
+          <p>{{ tweet.timestamp }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

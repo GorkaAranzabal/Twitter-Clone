@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <link rel="icon" type="image/png" sizes="32x32" href="static\Twitter Icon.png">
+  <head>
+    <title >Home / Twitter Clone</title>
+    <style>.tweet-box {
+        width: 500px;
+        background-color: #001c37;
+        border: 1px solid #00336a;
+        border-radius: 4px;
+        margin: 10px auto;
+        padding: 17px;
+        font-size: 17px;
+    }
+    .tweet-box p {
+        margin: 0;
+    }
+    .tweet {
+        font-weight: bold;
+        position: relative;
+        top: -8px;
+        left: 3px;
+    }
+    .body{
+      background-image: url('https://4kwallpapers.com/images/wallpapers/texture-dark-background-purple-2560x1440-3086.jpg');
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: repeat;
+      background-size: cover;
+    }
+    </style>
+  </head>
+  <body style="text-align: center" class="body">
+    <h1 style = "color:rgb(255, 255, 255); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Welcome to Twitter Clone By Gorka Games</h1>
+    {% if tweets %}
+      {% for tweet in tweets|reverse %}
+        <div style="color:rgb(255, 255, 255); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" class="tweet-box">
+            <img src="static\ProfileIcon.png" alt="ProfileIcon" width="30" height="30">
+              <!-- Add a button to open the profile page -->
+              <a href="{{ url_for('profile', username=tweet.account) }}" class="tweet" style="color: #ffffff; font-size: 19px;">{{ tweet.account }}</a>
+                <!--<span class="tweet">{{ tweet.account }}</span> -->
+                <p>{{ tweet.content }}</p>
+                <p style="font-size: 15px; color: #989898; position: relative; left: -130px;">{{ tweet.timestamp.strftime('%Y-%m-%d %H:%M:%S')}}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p id="tweetsDisplay" style="color: #989898; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" >No tweets to display</p>
+    {% endif %}
+    <form method="post" action="/post" class="tweet-box">
+        <img src="static\ProfileIcon.png" alt="ProfileIcon" width="30" height="30" style="position: absolute; left: 20px; top: 15px;">
+        <label for="account" style="color: azure; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; left: 60px; top: 20px;">Account:</label><br>
+        <input type="text" style="position: absolute; left: 20px; top: 50px;" id="accountName" name="account" placeholder="Account"><br>
+        <label for="content" style="color: azure; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Tweet:</label><br>
+        <img src="static\TweetButton.png" alt="ProfileIcon" width="70" height="50" style="position: relative; left: -55px; top: -32px;">
+        <textarea style="color: #ffffff; background-color: #00336a; border: 1px solid #000000;" id="content" name="content" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Post" style="color: rgb(255, 255, 255); background-color: rgb(33, 20, 220);">
+      </form>  
+      <audio id="tweetSound" src="static/tweet.mp3"></audio>
+
+<script>
+  const tweetSound = document.querySelector("#tweetSound");
+  document.querySelector("form").addEventListener("submit", () => {
+    tweetSound.play();
+  });
+</script>
+    <form action="{{ url_for('clear_database') }}" method="POST">
+        <button type="submit" class="btn btn-primary">Clear database</button>
+      </form>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+CREATE TABLE tweet (
+  id INTEGER PRIMARY KEY,
+  content TEXT,
+  account TEXT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+);
