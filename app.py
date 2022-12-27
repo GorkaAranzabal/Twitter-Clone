@@ -26,7 +26,7 @@ def homepage():
     #     print(tweet.content)
     print(tweets)
     user = Tweet.query.all()
-    return render_template('homepage.html', tweets=tweets, user=user)
+    return render_template('index.html', tweets=tweets, user=user)
 
 @app.route('/post', methods=['POST'])
 def post_tweet():
